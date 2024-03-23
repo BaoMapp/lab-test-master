@@ -1,3 +1,6 @@
+/* The code you provided is an HTML document structure. It represents the basic layout of a web page.
+Here's a breakdown of what each component does: */
+/* The code you provided is an HTML document structure. It includes the following components: */
 <!DOCTYPE html>
 <html>
 
@@ -7,7 +10,6 @@
 <meta charset="utf-8">
 <meta name="author" content="trendemy.com" />
 <!-- CSS definition file -->
-
 <link href="site.css" rel="stylesheet" />
 </head>
 
@@ -16,5 +18,6 @@
 <div class="row">
 <div class="col-md-12">
 <div class="header">
+<!-- Header title -->
 <h2>Project training - Build a sales website</h2>
 </div>

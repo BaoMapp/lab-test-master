@@ -1,49 +1,67 @@
+/* The Db class in PHP establishes a connection to a MySQL database, executes query statements, and
+returns results as arrays. */
 <?php
+// Define the Db class
 class Db
 {
-    //Database connection variable
+    // Database connection variable
     protected static $connection;
 
-
-    //Connection initialization function
+    // Connection initialization function
     public function connect()
     {
+        // Establish connection to the database
         $connection = mysqli_connect(
-            "localhost",
-            "root",
-            "",
-            "demo_lap3"
+            "localhost", // Hostname
+            "root",      // Username
+            "",          // Password
+            "demo_lap3"  // Database name
         );
 
+        // Set charset to utf8
         mysqli_set_charset($connection, 'utf8');
-        // Check connection
+
+        // Check if connection was successful
         if (mysqli_connect_errno()) {
             echo "Database connection failed: " . mysqli_connect_error();
         }
+
+        // Return the connection
         return $connection;
     }
 
-    //The function executes the query statement
+    // Function to execute a query statement
     public function query_execute($queryString)
     {
-        //Initiate connection
+        // Initialize connection
         $connection = $this->connect();
-        //Execute query execution, query is a function of mysqli library
+
+        // Execute query statement using mysqli query function
         $result = $connection->query($queryString);
+
+        // Close connection
         $connection->close();
+
+        // Return the result
         return $result;
     }
 
-    //The implementation function returns an array of result lists
+    // Function to return an array of result lists
     public function select_to_array($queryString)
     {
-        $rows = array();
-        $result = $this->query_execute($queryString);
+        $rows = array(); // Initialize array to store results
+        $result = $this->query_execute($queryString); // Execute query
+
+        // Check if result is false
         if ($result == false) return false;
-        // while loop is used to output the data array to each element
+
+        // Use while loop to fetch each row and add it to the array
         while ($item = $result->fetch_assoc()) {
             $rows[] = $item;
         }
+
+        // Return the array of results
         return $rows;
     }
 }
+?>

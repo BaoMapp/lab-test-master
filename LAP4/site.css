@@ -1,51 +1,76 @@
+/* The commented CSS code block is providing styling instructions for various elements in a web
+document. Here's a breakdown of what each part of the code is doing: */
+/* Apply font family to the entire document */
 html {
     font-family: sans-serif;
-    }
-    body {
+}
+
+/* Reset default margin of the body */
+body {
     margin: 0px;
-    }
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+}
+
+/* Set margin for heading elements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 25px 0 15px 0;
 }
+
+/* Style for h2 elements */
 h2 {
-font-size: 17px;
-font-weight: bold;
+    font-size: 17px;
+    font-weight: bold;
 }
+
+/* Center content with 80% width */
 #wrapper {
-width: 80%;
-margin: 0 auto;
+    width: 80%;
+    margin: 0 auto;
 }
+
+/* Styling for row elements */
 .row {
-width: 100%;
-display: inline-block;
-margin-bottom: 5px;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 5px;
 }
+
+/* Style for header class */
 .header {
-color: green;
-text-transform: uppercase;
+    color: green;
+    text-transform: uppercase;
 }
+
+/* Styling for label title */
 .lbltitle {
-width: 20%;
-float: left;
+    width: 20%;
+    float: left;
 }
+
+/* Styling for label input and output */
 .lblinput,
 .lbloutput {
-width: 80%;
-float: left;
+    width: 80%;
+    float: left;
 }
+
+/* Styling for submit button */
 .submit {
-width: 50%;
-float: left;
+    width: 50%;
+    float: left;
 }
+
+/* Set width for input and textarea elements */
 input,
 textarea {
-width: 300px;
+    width: 300px;
 }
+
+/* Set width for button elements */
 button {
     width: 307px;
-    }
+}

@@ -1,10 +1,18 @@
+/* This PHP code snippet is displaying a list of products in a table format on a web page. Here's a
+breakdown of what the code is doing: */
 <?php
+// Include the Product class file
 require_once('entities/product.class.php');
 ?>
+
 <?php
+// Include the header.php file
 include_once('header.php');
+
+// Get the list of products
 $prods = Product::list_product();
 ?>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -18,6 +26,7 @@ $prods = Product::list_product();
                     <td>Description</td>
                 </tr>
                 <?php
+                // Loop through the list of products
                 foreach ($prods as $item) {
                 ?>
                     <tr>
@@ -35,4 +44,6 @@ $prods = Product::list_product();
 </div>
 
 <?php
+// Include the footer.php file
 include_once('footer.php');
+?>

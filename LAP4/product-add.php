@@ -1,15 +1,21 @@
+/* This PHP code snippet is a form for adding products to a database. Here's a breakdown of what the
+code does: */
 <?php
+// Include the necessary class files
 require_once("entities/product.class.php");
 require_once('entities/category.class.php');
+
+// Check if form is submitted
 if (isset($_POST["btnsubmit"])) {
-    //Get value from form
+    // Get values from the form
     $productName = $_POST["txtname"];
     $cateID = $_POST["txtcateid"];
     $price = $_POST["txtprice"];
     $quantity = $_POST["txtquantity"];
     $description = $_POST["txtdesc"];
     $picture = $_FILES["txtpic"];
-    //Initialize the product object
+
+    // Initialize the product object
     $newProduct = new Product(
         $productName,
         $cateID,
@@ -18,34 +24,40 @@ if (isset($_POST["btnsubmit"])) {
         $description,
         $picture
     );
+
     $loi = array();
     $loi_str = "";
 
     // Save to the database
     $result = $newProduct->save($loi);
     if (!$result) {
-        //Error query
+        // Error in query, redirect with failure status
         header("Location: product-add.php?status=failure");
     } else {
+        // Product inserted successfully, redirect with success status
         header("Location: product-add.php?status=inserted");
     }
 }
 ?>
 <?php if ($loi_str != "") {
 ?>
+    <!-- Display errors if any -->
     <div class="alert alert-danger"><?php echo $loi_str ?></div>
 <?php } ?>
 <?php require 'header.php'; ?>
 <?php
+// Check for status in URL
 if (isset($_GET["status"])) {
     if ($_GET["status"] == 'inserted') {
+        // Display success message if product is inserted successfully
         echo "<h2>Add successful product.</h2>";
     } else {
+        // Display failure message if product insertion fails
         echo "<h2>Add failed product.</h2>";
     }
 }
 ?>
-<!-- Form Add products -->
+<!-- Form to add products -->
 <form method="post" enctype="multipart/form-data">
     <!-- Product's name -->
     <div class="row">
@@ -53,10 +65,7 @@ if (isset($_GET["status"])) {
             <label> Product's name </label>
         </div>
         <div class="lblinput">
-            <input type="text" name="txtname" value="<?php echo
-
-                                                        isset($_POST["txtname"]) ? $_POST["txtname"] : "" ?>">
-
+            <input type="text" name="txtname" value="<?php echo isset($_POST["txtname"]) ? $_POST["txtname"] : "" ?>">
         </div>
     </div>
     <!-- Product Description -->
@@ -65,8 +74,7 @@ if (isset($_GET["status"])) {
             <label> Product Description </label>
         </div>
         <div class="lblinput">
-            <textarea type="text" name="txtdesc" cols="21" rows="10" value="<?php echo isset($_POST["txtdesc"]) ? $_POST["txtdesc"] : ""
-                                                                            ?>"></textarea>
+            <textarea type="text" name="txtdesc" cols="21" rows="10"><?php echo isset($_POST["txtdesc"]) ? $_POST["txtdesc"] : "" ?></textarea>
         </div>
     </div>
     <!-- The number of products -->
@@ -75,10 +83,7 @@ if (isset($_GET["status"])) {
             <label> The number of products </label>
         </div>
         <div class="lblinput">
-            <input type="number" name="txtquantity" value="<?php echo
-
-                                                            isset($_POST["txtquantity"]) ? $_POST["txtquantity"] : "" ?>">
-
+            <input type="number" name="txtquantity" value="<?php echo isset($_POST["txtquantity"]) ? $_POST["txtquantity"] : "" ?>">
         </div>
     </div>
     <!-- Product price -->
@@ -87,10 +92,7 @@ if (isset($_GET["status"])) {
             <label> Product price </label>
         </div>
         <div class="lblinput">
-            <input type="number" name="txtprice" value="<?php echo
-
-                                                        isset($_POST["txtprice"]) ? $_POST["txtprice"] : "" ?>">
-
+            <input type="number" name="txtprice" value="<?php echo isset($_POST["txtprice"]) ? $_POST["txtprice"] : "" ?>">
         </div>
     </div>
     <!-- Product Type -->
@@ -103,23 +105,16 @@ if (isset($_GET["status"])) {
                 <option value="" selected>-- Select type --</option>
                 <?php $cates = Category::list_category() ?>
                 <?php foreach ($cates as $item) { ?>
-                    <option value="<?php echo $item['CateID'] ?>"><?php echo
-
-                                                                    $item['CategoryName'] ?></option>
-
+                    <option value="<?php echo $item['CateID'] ?>"><?php echo $item['CategoryName'] ?></option>
                 <?php } ?>
             </select>
-
-            <?php echo
-
-            isset($_POST["txtcateid"]) ? $_POST["txtcateid"] : "" ?>
-
+            <?php echo isset($_POST["txtcateid"]) ? $_POST["txtcateid"] : "" ?>
         </div>
     </div>
-    <!-- Product Type -->
+    <!-- Product Image -->
     <div class="row">
         <div class="lbltitle">
-            <label>Url Image</label>
+            <label>Image URL</label>
         </div>
         <div class="lblinput">
             <input type="file" name="txtpic" accept=".png,.gif,.jpg,.jpeg">
@@ -127,10 +122,10 @@ if (isset($_GET["status"])) {
     </div>
     <div class="row">
         <div class="lbltitle">
-            Click more
+            Click to add
         </div>
         <div class="submit">
-            <button type="submit" name="btnsubmit"> More products </button>
+            <button type="submit" name="btnsubmit"> Add product </button>
         </div>
     </div>
 </form>
